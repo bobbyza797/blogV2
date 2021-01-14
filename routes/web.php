@@ -49,7 +49,10 @@ Route::get('/post',function(){
 });
 
 // แอดมิน
-Route::get('/test',function(){
+Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
+    Route::get('/dashboard',function(){
+        return viwe('admim.dashboard.index');
+    });
 
-    return view('admin.dashboard.index');
+    Route::resource('category', 'CategoryController');
 });
